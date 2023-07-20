@@ -1,6 +1,6 @@
 ---
 title: "Microbiome Sequence Analysis"
-subtitle: "Setting Up The Workflow: Using QIIME 2 in an RStudio Server Environment"
+subtitle: "Setting Up The Workflow: Installing QIIME 2 on an RStudio Server"
 author: "Sarah Tanja"
 format: html
 editor: visual
@@ -14,6 +14,14 @@ bibliography: ./references/qiime2.bib
 ---
 
 ## Overview
+Here I walk though the install of `Miniconda3` and `QIIME2` on the Robert's Lab `raven` server where I can use them on the 16S sequence data from the microbiome study.
+
+### Install & Load Packages
+
+```{r}
+install.packages('reticulate') # allows you to execute python code chunks in RStudio
+library(reticulate)
+```
 
 ## Gitignore Large Files
 
@@ -125,7 +133,7 @@ conda list
 
 In `Terminal`:
 
-``` Terminal
+``` terminal
 conda update conda
 ```
 
@@ -133,16 +141,42 @@ conda update conda
 
 In `Terminal`:
 
-``` Terminal
+``` terminal
 wget https://data.qiime2.org/distro/core/qiime2-2023.5-py38-linux-conda.yml
 conda env create -n qiime2-2023.5 --file qiime2-2023.5-py38-linux-conda.yml
 rm qiime2-2023.5-py38-linux-conda.yml
 ```
 
-```{r, engine=bash}
+```terminal
 conda activate qiime2-2023.5
 ```
 
-```{python}
-conda activate qiime2-2023.5
+### Test the installation
+
+```terminal
+qiime --help
 ```
+:::callout-success
+No errors were reported when running `qiime --help`! This means installation was successful!
+:::
+
+:::callout-warning
+I want to make sure I can actually use python code chunks in R... so far that has NOT been succesful and I don't know why?
+:::
+
+##### Troubleshooting using python and qiime2 environment:
+
+```{r}
+# Set the conda environment path
+condaenv_path <- "~/applications/miniconda/envs/qiime2-2023.5"
+
+# Use the conda environment
+use_condaenv(condaenv = condaenv_path)
+```
+
+
+```{r, engine='python'}
+qiime --help
+```
+
+

@@ -1,0 +1,18 @@
+---
+title: "Microbiome Sequence Analysis"
+subtitle: "Importing 16S Sequence Data"
+author: "Sarah Tanja"
+format: html
+editor: visual
+toc: true
+toc-title: Contents <i class="bi bi-bookmark-heart"></i>
+toc-depth: 5
+toc-location: left
+reference-location: margin
+citation-location: margin
+bibliography: ./references/qiime2.bib
+---
+
+## Overview
+
+Here I follow the QIIME2 [Casava 1.8 paired-end demultiplexed fastq](https://docs.qiime2.org/2023.5/tutorials/importing/#:~:text=Casava%201.8%20single%2Dend%20demultiplexed%20fastq) tutorial on importing data. The 16S sequences were provided to me from Mr. DNA via a DropBox download link. They are **Demultiplexed** (aka **Demuxed**) sequences that still have the forward and reverse primers in the sequences.
