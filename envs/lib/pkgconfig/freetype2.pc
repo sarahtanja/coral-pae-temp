@@ -1,0 +1,14 @@
+prefix=/home/shared/8TB_HDD_02/stanja/sarahtanja/coral-pae-temp/envs
+exec_prefix=/home/shared/8TB_HDD_02/stanja/sarahtanja/coral-pae-temp/envs
+libdir=/home/shared/8TB_HDD_02/stanja/sarahtanja/coral-pae-temp/envs/lib
+includedir=/home/shared/8TB_HDD_02/stanja/sarahtanja/coral-pae-temp/envs/include
+
+Name: FreeType 2
+URL: https://freetype.org
+Description: A free, high-quality, and portable font engine.
+Version: 24.3.18
+Requires: 
+Requires.private: zlib, libpng
+Libs: -L/home/shared/8TB_HDD_02/stanja/sarahtanja/coral-pae-temp/envs/lib -lfreetype
+Libs.private: 
+Cflags: -I${includedir}/freetype2
