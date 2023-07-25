@@ -1,5 +1,4 @@
 # coral-pae-temp
-
 coral = *Montipora capitata*, commonly known as 'rice coral', a key reef-building coral in Hawaii
 pae = Phthalate Acid Esters, a category of chemicals commonly added to plastics to make them flexible
 temp = acute thermal stress simulating summer heat-wave conditions in Hawaii
@@ -15,4 +14,3 @@ extractions
 analysis
  - microbiome
  - tagseq-dge
-
