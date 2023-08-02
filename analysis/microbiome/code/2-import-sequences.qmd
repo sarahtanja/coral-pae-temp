@@ -27,7 +27,7 @@ The 16S sequences were provided to me from Mr. DNA via a DropBox download link. 
 
 -   Other than demultiplexing; you can consider the Raw Data on BaseSpace as untouched (**The Forward and Reverse Primer Sequences have not been removed**)
 
-Here I follow the QIIME2 [Casava 1.8 paired-end demultiplexed fastq](Casava 1.8 paired-end demultiplexed fastq) tutorial example on importing data, using the files provided to me by the Mr. DNA, Molecular Research.
+Here I follow the QIIME2 Casava 1.8 paired-end demultiplexed fastq tutorial example on importing data, using the files provided to me by the Mr. DNA, Molecular Research.
 
 ## Data download
 
@@ -54,7 +54,6 @@ library(reticulate)
 ```{r, engine='python'}
 conda activate qiime2-2023.5
 ```
-
 
 ## Get demultiplexed sequences
 

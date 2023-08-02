@@ -95,7 +95,7 @@ Instructions were followed from conda.io website [here](https://conda.io/project
 :::
 
 ```{r, engine=bash, title='curl Linux Installer'}
-cd ~
+cd ~/sarahtanja/programs
 curl -O https://repo.anaconda.com/miniconda/Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
 ls
 ```
@@ -107,7 +107,7 @@ The SHA256 hash for Python 3.11 Miniconda3 Linux 64-bit is: `634d76df5e489c44ade
 Download the installer file and before installing verify it as follows:
 
 ```{r, engine=bash, title='verify installer hash'}
-cd ~
+cd ~/sarahtanja/programs
 sha256sum Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
 ```
 
@@ -116,7 +116,7 @@ sha256sum Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
 Copy the code below into the `Terminal` and press enter
 
 ```{r, engine='bash'}
-cd ~
+cd ~/sarahtanja/programs
 bash Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
 ```
 
@@ -172,7 +172,7 @@ Sys.setenv(PATH = paste("/home/shared/8TB_HDD_02/stanja/miniconda3/bin:", Sys.ge
 
 ```{r}
 # Set the conda environment path
-condaenv_path <- "~/miniconda/envs/qiime2-2023.5"
+condaenv_path <- "~/miniconda3/envs/qiime2-2023.5"
 
 # Use the conda environment
 use_condaenv(condaenv = condaenv_path)
