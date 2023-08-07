@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Maximum file size (in bytes)
+max_file_size=104857600
+
+# Find all files larger than max_file_size and add them to the .gitignore file
+find . -type f -size +$max_file_size -exec echo "{}" >> .gitignore \;

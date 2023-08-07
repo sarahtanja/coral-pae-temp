@@ -1,0 +1,182 @@
+---
+title: "Microbiome Sequence Analysis"
+subtitle: "Setting Up The Workflow: Installing QIIME 2 on an RStudio Server"
+author: "Sarah Tanja"
+format: html
+editor: visual
+toc: true
+toc-title: Contents <i class="bi bi-bookmark-heart"></i>
+toc-depth: 5
+toc-location: left
+reference-location: margin
+citation-location: margin
+bibliography: ./references/qiime2.bib
+---
+
+## Overview
+Here I walk though the install of `Miniconda3` and `QIIME2` on the Robert's Lab `raven` server where I can use them on the 16S sequence data from the microbiome study.
+
+### Install & Load Packages
+
+```{r}
+install.packages('reticulate') # allows you to execute python code chunks in RStudio
+library(reticulate)
+```
+
+## Gitignore Large Files
+
+In this project I'm dealing with large files that will end up in the `./rawdata` and `./output` directories. Any file larger than 100 MB cannot be pushed to GitHub (\*without paying for GitHub Large File Storage). To avoid that, I use two methods:
+
+1.  Built-in hooks to automatically ignore files larger than 100 MB (no matter the directory or file name!)
+
+-   Create a new text file in the `.git/hooks/` directory of your repository called `pre-commit`
+
+-   *Select the `More` tab with the gear icon under the RStudio Files navigator bar and select 'show hidden files' to see the .git folder*.
+
+-   Navigate to the `.git/hooks` folder
+
+-   Rename `pre-commit.sample` file to `pre-commit`
+
+-   Add the following text to the `.git/hooks/pre-commit` file:
+
+```         
+#!/bin/sh
+
+# Maximum file size (in bytes)
+max_file_size=104857600
+
+# Find all files larger than max_file_size and add them to the .gitignore file
+find . -type f -size +$max_file_size -exec echo "{}" >> .gitignore \;
+```
+
+-   Save the file changes
+
+This code sets the max_file_size variable to 100 MB and then uses the find command to locate all files in the repository that are larger than the specified max_file_size. The exec option of the find command appends the name of each file that matches the criteria to the .gitignore file.
+
+Save the pre-commit file and make it executable by running the following command in Terminal from your base git directory:
+
+```{r, engine=bash}
+cd ../../
+chmod +x .git/hooks/pre-commit
+```
+
+With these changes, whenever you run a git commit command, Git will first execute the pre-commit hook, which will automatically add any files larger than 100 MB to the .gitignore file. This will prevent Git from tracking these files in the repository going forward.
+
+2.  Manually execute code to find and add files greater than 100 MB to .gitignore before committing
+
+Use the following code as a bash terminal command to find and add files greater than 100 MB from the repo to .gitignore
+
+```{r, engine=bash}
+cd ../../
+find . -size +1G | sed 's|^./||g' | cat >> .gitignore
+```
+
+::: callout-tip
+This handy code came from [this](https://github.com/sr320/course-fish546-2015/issues/43) Robert's Lab GitHub Issue
+:::
+
+## Install QIIME 2
+
+Here I am installing QIIME 2 on the Roberts Lab `raven` server within a `conda` environment by following the steps outlined in the [QIIME 2 docs webpage](https://docs.qiime2.org/2023.5/install/native/).
+
+> ### **Installing Miniconda**
+>
+> [Miniconda](https://docs.conda.io/en/latest/miniconda.html) provides the `conda` environment and package manager, and is the recommended way to install QIIME 2. Follow the [Miniconda instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html) for downloading and installing Miniconda. You may choose either Miniconda2 or Miniconda3 (i.e. Miniconda Python 2 or 3). QIIME 2 will work with either version of Miniconda. It is important to follow all of the directions provided in the [Miniconda instructions](https://conda.io/projects/conda/en/latest/user-guide/install/index.html), particularly ensuring that you run `conda init` at the end of the installation process, to ensure that your Miniconda installation is fully installed and available for the following commands .
+
+I choose to work with Miniconda3 and Python3 and am installing on a Linux OS (The Roberts Lab `raven` server).
+
+In the following line of code I am using `curl -O` to download `miniconda3 Linux 64-bit` installer into an `applications` folder that exists outside of my repository and is the central place where I am downloading software.
+
+#### Download the Miniconda installer for Linux
+
+::: callout-tip
+Instructions were followed from conda.io website [here](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html)
+:::
+
+```{r, engine=bash, title='curl Linux Installer'}
+cd ~/applications
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
+ls
+```
+
+#### Verify installer hashes
+
+The SHA256 hash for Python 3.11 Miniconda3 Linux 64-bit is: `634d76df5e489c44ade4085552b97bebc786d49245ed1a830022b0b406de5817`
+
+Download the installer file and before installing verify it as follows:
+
+```{r, engine=bash, title='verify installer hash'}
+cd ~/applications
+sha256sum Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
+```
+
+#### Run Miniconda
+
+Copy the code below into the `Terminal` and press enter
+
+```         
+cd ~/applications
+bash Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
+```
+
+Follow all prompts in the Terminal to complete the install.
+
+#### Test installation
+
+In `Terminal`:
+
+```         
+conda list
+```
+
+#### Update `conda`
+
+In `Terminal`:
+
+``` terminal
+conda update conda
+```
+
+### Install QIIME 2 within a `conda` environment
+
+In `Terminal`:
+
+``` terminal
+wget https://data.qiime2.org/distro/core/qiime2-2023.5-py38-linux-conda.yml
+conda env create -n qiime2-2023.5 --file qiime2-2023.5-py38-linux-conda.yml
+rm qiime2-2023.5-py38-linux-conda.yml
+```
+
+```terminal
+conda activate qiime2-2023.5
+```
+
+### Test the installation
+
+```terminal
+qiime --help
+```
+:::callout-success
+No errors were reported when running `qiime --help`! This means installation was successful!
+:::
+
+:::callout-warning
+I want to make sure I can actually use python code chunks in R... so far that has NOT been succesful and I don't know why?
+:::
+
+##### Troubleshooting using python and qiime2 environment:
+
+```{r}
+# Set the conda environment path
+condaenv_path <- "~/applications/miniconda/envs/qiime2-2023.5"
+
+# Use the conda environment
+use_condaenv(condaenv = condaenv_path)
+```
+
+
+```{r, engine='python'}
+qiime --help
+```
+
+

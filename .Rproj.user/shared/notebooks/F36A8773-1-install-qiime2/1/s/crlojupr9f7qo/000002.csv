@@ -1,0 +1,13 @@
+"0","cd ~/sarahtanja/programs
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
+ls"
+"2","  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0"
+"2","  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0"
+"2"," 85 98.4M   85 83.7M    0     0  81.6M      0  0:00:01  0:00:01 --:--:-- 81.5M"
+"2","100 98.4M  100 98.4M    0     0  84.5M      0  0:00:01  0:00:01 --:--:-- 84.4M
+"
+"1","kallisto_linux-v0.46.1.tar
+Miniconda3-py311_23.5.2-0-Linux-x86_64.sh
+"

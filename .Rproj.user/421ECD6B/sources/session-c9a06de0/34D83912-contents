@@ -1,0 +1,10 @@
+# Jupyter Notebook tunnel
+Host raven_tunnel
+HostName 172.25.149.12
+User stanja
+ControlMaster auto
+ServerAliveInterval 30
+ServerAliveCountMax 1200
+ForwardX11 yes
+LocalForward localhost:9000
+localhost:9000
