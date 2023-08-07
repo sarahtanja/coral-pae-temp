@@ -19,9 +19,7 @@ Here I walk though the install of `Miniconda3` and `QIIME2` on the Robert's Lab 
 
 ### Install & Load Packages
 
-```{r}
-install.packages('reticulate') # allows you to execute python code chunks in RStudio
-library(reticulate)
+```         
 ```
 
 ## Gitignore Large Files
@@ -57,7 +55,7 @@ This code sets the max_file_size variable to 100 MB and then uses the find comma
 Save the pre-commit file and make it executable by running the following command in Terminal from your base git directory:
 
 ```{r, engine=bash}
-cd ../../../cd
+cd ../../../
 chmod +x .git/hooks/pre-commit
 ```
 
@@ -124,15 +122,15 @@ Follow all prompts in the Terminal to complete the install.
 
 #### Test installation
 
-```{r, engine='bash'conda init}
-# Execute conda list using system() function
-system("conda list", intern = TRUE)
+```{r, engine='bash'}
+echo $PATH
+
 
 ```
 
 #### Update `conda`
 
-```{r, engine='bash', engine.opts='1'}
+```{r, engine='bash'}
 conda update conda
 ```
 
