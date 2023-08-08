@@ -51,14 +51,16 @@ In the `demux` folder is a `fastq.gz` file for The file name includes the sample
 library(reticulate)
 ```
 
-```{r, engine='python'}
+```{r, engine='bash'}
 conda activate qiime2-2023.5
 ```
 
-## Get demultiplexed sequences
+## Import sequences
 
 ```{r, engine='bash'}
-
-unzip 
-
+qiime tools import \
+  --type 'SampleData[PairedEndSequencesWithQuality]' \
+  --input-path casava-18-paired-end-demultiplexed \
+  --input-format CasavaOneEightSingleLanePerSampleDirFmt \
+  --output-path demux-paired-end.qza
 ```
