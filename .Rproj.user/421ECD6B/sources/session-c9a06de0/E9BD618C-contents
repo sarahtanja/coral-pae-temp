@@ -1,9 +1,0 @@
-.Rproj.user
-.Rhistory
-.RData
-.Ruserdata
-*.zip
-*.tar.gz
-*.qza
-*.qzv
-.git/objects/pack/pack-cb793ef138c3675f8caa24917809b9c1754cae7f.pack
