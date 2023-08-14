@@ -1,4 +1,4 @@
-#SampleID	BarcodeSequence	LinkerPrimerSequence	BarcodeName	ReversePrimer	ProjectName	Description	pae	temp	paetemp	colony	tank
+#SampleID	BarcodeSequence	LinkerPrimerSequence	BarcodeName	ReversePrimer	ProjectName	Description	Pae	Temp	PaeTemp	Colony	Tank
 1.CA2a	ATCATAGGCT	GTGYCAGCMGCCGCGGTAA	60bp_UDPi5_0073	GGACTACNVGGGTWTCTAAT	060823STillcus515F	1.CA2a	control	ambient	control-ambient	1	A2
 1.CH2a	TGTTAGAAGG	GTGYCAGCMGCCGCGGTAA	60bp_UDPi5_0074	GGACTACNVGGGTWTCTAAT	060823STillcus515F	1.CH2a	control	hot	control-hot	1	H2
 1.Ea	GATGGATGTA	GTGYCAGCMGCCGCGGTAA	60bp_UDPi5_0075	GGACTACNVGGGTWTCTAAT	060823STillcus515F	1.Ea	env	ambient	env-ambient	1	KB
