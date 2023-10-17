@@ -1,0 +1,161 @@
+---
+title: "temp-data"
+author: "Sarah Tanja"
+date: "8/1/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(dplyr)
+library(lubridate)
+```
+Read in csv's, logs from HOBO pendent loggers set to record temp and lux every minute from August 12th at midnight to Aug 17th at 16:20 local HI time
+```{r}
+amb1 <- read_csv("pae-temp-ambient-1.csv", skip=1,
+                  col_names = c('obs', 'DateTimeHST', 'amb1tempC', 'amb1lux')) %>% 
+                  select(-1)
+
+amb2 <- read_csv("pae-temp-ambient-2.csv", skip=1, 
+                  col_names = c('obs', 'DateTimeHST', 'amb2tempC', 'amb2lux')) %>% 
+                  select(-1)
+
+high1 <- read_csv("pae-temp-high-1.csv", skip=1, 
+                  col_names = c('obs', 'DateTimeHST', 'high1tempC', 'high1lux')) %>% 
+                  select(-1)
+
+high2 <- read_csv("pae-temp-high-2.csv", skip=1, 
+                  col_names = c('obs', 'DateTimeHST', 'high2tempC', 'high2lux')) %>% 
+                  select(-1)
+```
+Convert "DateTime" column to POSIXct class using mdy_hms
+```{r}
+amb1$DateTimeHST <- mdy_hms(amb1$DateTimeHST)  # mdy_hms for month/day/year hour:minute:second format
+amb2$DateTimeHST <- mdy_hms(amb2$DateTimeHST)
+high1$DateTimeHST <- mdy_hms(high1$DateTimeHST)
+high2$DateTimeHST <- mdy_hms(high2$DateTimeHST)
+```
+
+select date range of experiment
+```{r}
+start_datetime <- mdy_hms("08/15/2022 15:00:00")
+end_datetime <- mdy_hms("08/17/2022 15:00:00")
+```
+
+filter the rows within the date-time range 
+```{r}
+amb1 <- amb1 %>%
+  filter(DateTimeHST >= start_datetime & DateTimeHST <= end_datetime)
+
+amb2 <- amb2 %>%
+  filter(DateTimeHST >= start_datetime & DateTimeHST <= end_datetime)
+
+high1 <- high1 %>%
+  filter(DateTimeHST >= start_datetime & DateTimeHST <= end_datetime)
+
+high2 <- high2 %>%
+  filter(DateTimeHST >= start_datetime & DateTimeHST <= end_datetime)
+```
+
+
+merge data sets together by DateTime
+```{r}
+amb_templog <- full_join(amb1, amb2, by = "DateTimeHST")
+```
+
+```{r}
+high_templog <- full_join(high1, high2, by = "DateTimeHST")
+```
+
+```{r}
+all_templog <- full_join(amb_templog, high_templog, by = "DateTimeHST")
+```
+
+plot 
+```{r}
+ggplot(all_templog, aes(x = DateTimeHST)) +
+  geom_point(aes(y = amb1tempC), color = "blue", size = 1) +
+  geom_point(aes(y = amb2tempC), color = "purple", size = 1) +
+  geom_point(aes(y = high1tempC), color = "red", size = 1) +
+  geom_point(aes(y = high2tempC), color = "orange", size = 1) +
+  labs(title = "Scatter Plot with Time on X-Axis and 4 Values on Y-Axis",
+       x = "Time",
+       y = "Temp(C)")
+```
+
+paired sample t-tests, between each temp treatment
+amb1 vs amb2
+```{r}
+ttest_amb1_amb2 <- t.test(all_templog$amb1tempC, all_templog$amb2tempC, paired = TRUE)
+t.test(all_templog$amb1tempC, all_templog$amb2tempC, paired = TRUE)
+```
+
+high1 vs high2
+```{r}
+ttest_high1_high2 <- t.test(all_templog$high1tempC, all_templog$high2tempC, paired = TRUE)
+t.test(all_templog$high1tempC, all_templog$high2tempC, paired = TRUE)
+```
+
+amb1 vs high1
+```{r}
+ttest_amb1_high1 <- t.test(all_templog$amb1tempC, all_templog$high1tempC, paired = TRUE)
+t.test(all_templog$amb1tempC, all_templog$high1tempC, paired = TRUE)
+```
+
+amb1 vs high2
+```{r}
+ttest_amb1_high2 <- t.test(all_templog$amb1tempC, all_templog$high2tempC, paired = TRUE)
+t.test(all_templog$amb1tempC, all_templog$high2tempC, paired = TRUE)
+```
+
+amb2 vs high1
+```{r}
+ttest_amb2_high1 <- t.test(all_templog$amb2tempC, all_templog$high1tempC, paired = TRUE)
+t.test(all_templog$amb2tempC, all_templog$high1tempC, paired = TRUE)
+```
+
+amb2 vs high2
+```{r}
+ttest_amb2_high2 <- t.test(all_templog$amb2tempC, all_templog$high2tempC, paired = TRUE)
+t.test(all_templog$amb2tempC, all_templog$high2tempC, paired = TRUE)
+```
+A small p-value (typically less than 0.05) suggests that there is a significant difference between the means.
+
+averaged metadata to talk about ambient vs high
+```{r}
+all_templog <- all_templog %>% 
+  mutate(ambavgtempC = rowMeans(select(., amb1tempC, amb2tempC))) %>% 
+  mutate(highavgtempC = rowMeans(select(., high1tempC, high2tempC)))
+```
+
+avg amb vs avg high
+```{r}
+ttest_amb_high <- t.test(all_templog$ambavgtempC, all_templog$highavgtempC, paired = TRUE)
+t.test(all_templog$ambavgtempC, all_templog$highavgtempC, paired = TRUE)
+```
+```{r}
+summary(all_templog$ambavgtempC)
+```
+```{r}
+summary(all_templog$highavgtempC)
+```
+
+plot
+
+```{r}
+ggplot(all_templog, aes(x = DateTimeHST)) +
+  geom_point(aes(y = ambavgtempC), color = "blue", size = 1) +
+  geom_point(aes(y = highavgtempC), color = "orange", size = 1) +
+  labs(title = "Scatter Plot with Time on X-Axis and 4 Values on Y-Axis",
+       x = "Time",
+       y = "Temp(C)")
+```
+
+```{r}
+mean(c(all_templog$amb1lux, all_templog$amb2lux, all_templog$high1lux, all_templog$high2lux))
+```
+
