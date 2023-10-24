@@ -1,0 +1,32 @@
+---
+title: "Filter Feature Table"
+format: html
+editor: visual
+---
+
+# [Tutorial: Integrating QIIME2 and R for data visualization and analysis using qiime2R (*March 2020 Update v0.99.20*)](https://forum.qiime2.org/t/tutorial-integrating-qiime2-and-r-for-data-visualization-and-analysis-using-qiime2r/4121/1)
+
+## Install R package qiime2R using devtools
+
+```{r}
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+
+devtools::install_github("jbisanz/qiime2R") # current version is 0.99.20
+```
+
+```{r}
+library(qiime2R)
+```
+## Read in tab-separated-value (.tsv) metadada
+```{r}
+metadata <- readr::read_tsv("../data/sample-metadata-verbose.tsv")
+head(metadata)
+```
+
+
+## Read in table of amplicon sequence variants
+
+```{r}
+ASV <- read_qza("../output/dada2/table.qza")
+```
+
