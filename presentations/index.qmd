@@ -10,116 +10,113 @@ title-slide-attributes:
 format: 
   revealjs:
     slide-number: true
-    chalkboard: 
-      buttons: false
+    smaller: false
     preview-links: auto
-    theme: simple
-    footer: "Sarah Tanja (stanja@uw.edu)"
+    theme: [simple, custom.scss]
+    # footer: "Sarah Tanja (stanja@uw.edu)"
 ---
 
-## **Montipora capitata** survive by symbiosis 
+## {background-image="images/himb-mcap-bleached-tips.jpg"}
 
-![](images/0457_C01_01.jpg)
-> "Symbiosis is the living together of unlike organisms" - Anton Heinrich de Bary, 1878
-
-::: {.notes}
+::: notes
 Corals are invertebrates closely related to sea anemones in the phylum Cnidaria. Individual animals are known as polyps, which are each crowned by an oral disc or mouth fringed by tentacles that house stinging nematocysts,
 
 The corals I'm going to speak about today are stony (or scleractinian) corals that build a hard calcium carbonate (aragonite, a crystalline form of calcium carbonate) skeleton under their soft tissue.
 
-The polyp's soft tissue body sits in the corallite stony cup it builds, and can be retracted (they are nocturnal, with polyps and tentacles eerging at night, and mainly staying retracted during the day).
+Montipora capitata are members of the Acroporidae family of stony corals which are characterized by their small polyps and the presence of a corallite (skeletal cup) at the tip of each branch
+:::
 
+## {background-image="images/himb-mcap-closeup.jpg"}
+
+::: notes
+The polyp's soft tissue body sits in the corallite stony cup it builds, and can be retracted (they are nocturnal, with polyps and tentacles emerging at night, and mainly staying retracted during the day).
+:::
+
+
+## **Montipora capitata** survive by symbiosis
+
+![](images/himb-mcap-closeup.jpg)
+
+> "Symbiosis is the living together of unlike organisms" - Anton Heinrich de Bary, 1878
+
+
+::: notes
 Reef-building corals are fascinating wonderful animals that survive in oligotrophic (nutrient-poor) warm tropical waters through their symbiotic relationship with photosynthetic dinoflagellate algae called symbiodinium.
 :::
 
-## A Holobiont is an assembly made up of a host and the many organisms living in and around it 
+## Holobionts are an assembly of host and symbionts
 
+![](images/Relationships_between_corals_and_their_microbial_symbionts.jpg){height="550"}
 
-
-![](images/Relationships_between_corals_and_their_microbial_symbionts.jpg)
-> "I get by with a little help from my friends" - The Beatles, 1967 
-
-::: {.footer}
-By Raquel S. Peixoto, Phillipe M. Rosado, Deborah Catharine de Assis Leite, Alexandre S. Rosado and David G. Bourne - https://www.frontiersin.org/articles/10.3389/fmicb.2017.00341/full{{doi%7C10.3389/fmicb.2017.00341}}, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=92865419
-:::
-
-## **Montipora capitata** belong to the dominant group of reef-building corals
-
-![](images/coral01a_462.jpg)
-
-::: {.notes}
-
-Although some corals are solitary polyps most are colonial, in which a founding single polyp reproduces asexually by budding into large, often beautiful structured coral colonies, and when many colonies (of different species) are all growing and living together they form what we know as a 'reef'.
-
-The importance of the reef is well illustrated in movies like 'Finding Nemo', the reef is home to a diversity of marine organisms. When scientists talk about the ecosystem functions of reefs we're talking about all the good things reefs do: they provide 3D structural habitat, the mucus secreting from them Reefs are essential habitat and
-
-Montipora capitata are members of the Acroporidae family of stony corals which are characterized by their small polyps and the presence of a corallite (skeletal cup) at the tip of each branch
-
-And I want you to keep in mind that all those functions, all those good things, depends on the survival of
-
-Declines in coral cover were first noticed by \[person\] in \[location\], and has rapidly gotten worse. Corals cover reduction often due to coral mass bleaching, and coral disease is a conservation problem that scientists have been alarmed about since \[year\]
-:::
-
-
-##  {background-image="images/coral-cycle2-websize.jpg"}
-
-## Colony
-
-::: {style="width:100%;height:0;padding-bottom:50%;position:relative;"}
-<iframe src="https://giphy.com/embed/cxmwhOBpFEDcc" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
-
-</iframe>
-:::
-
-<p><a href="https://giphy.com/gifs/disneypixar-pixar-disney-cxmwhOBpFEDcc"></a></p>
-
-## Reef
-
-::: {style="width:100%;height:0;padding-bottom:50%;position:relative;"}
-<iframe src="https://giphy.com/embed/3o6ozglbFoo09O0Sli" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
-
-</iframe>
-:::
-
-<p><a href="https://giphy.com/gifs/findingdory-finding-dory-nemo-3o6ozglbFoo09O0Sli"></a></p>
-
-## Slide Backgrounds {background="#43464B"}
-
-Reef corals require clear water so that sunlight can reach their zooxanthellae for photosynthesis. For this reason they are generally found only in waters with small amounts of suspended material, or water of low turbidity and low productivity. This leads to an interesting paradox---coral reefs require clear, nutrient-poor water, but `they are among the most productive and diverse marine environments`.
+> "I get by with a little help from my friends" - The Beatles, 1967
 
 ::: footer
-Learn more: [Slide Backgrounds](https://quarto.org/docs/presentations/revealjs/#color-backgrounds)
-:::
-
-# Introduce the problems
-
-## 
-
-![](images/plastic_monster_celine_bellanger_UN_plastic_is_forever.jpg){.full-size-image}
-
-::: footer
-Learn more: [Plastic monster, France Photo by Céline Bellanger for the United Nations Environmental Programme (UNEP) Plastic is Forever Exhibit](https://www.un.org/en/exhibits/exhibit/in-images-plastic-forever)
+By Raquel S. Peixoto, Phillipe M. Rosado, Deborah Catharine de Assis Leite, Alexandre S. Rosado and David G. Bourne
 :::
 
 ::: notes
-`8 million tons` of plastics enter the oceans `every year`
-Like this art piece by photographer Celine Bellanger on the coast of France depits, this is the monster we are fighting
+The holobiont concept posits that a host and its associated microbiota with which it interacts, form a holobiont, and have to be studied together as a coherent biological and functional unit to understand its biology, ecology, and evolution.
 :::
 
-## Incremental Lists
 
-Lists can optionally be displayed incrementally:
-
-::: incremental
--   First item
--   Second item
--   Third item
-:::
+## `Coral reefs` require clear, nutrient-poor water, but they `are among the most productive marine environments, and support 25% of marine biodiversity`  {background="#43464B"}
 
 . . .
 
-<br/> Insert pauses to make other types of content display incrementally.
+<br/>
+
+::: {style="width:100%;height:0;padding-bottom:50%;position:absolute;"}
+<iframe src="https://giphy.com/embed/cxmwhOBpFEDcc" width="50%" height="50%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+:::
+
+::: notes
+ When scientists talk about the ecosystem functions of reefs we're talking about all the good things reefs do: they provide 3D structural habitat, the mucus secreting from them Reefs are essential habitat and
+ 
+The importance of the reef is well illustrated in movies like 'Finding Nemo', the reef is home to a diversity of marine organisms. 
+
+And I want you to keep in mind that all those functions, all those good things, depends on the survival of corals, facilitated by symbionts 
+:::
+
+
+## Coral reefs are threatened by climate change and pollution
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+:::
+
+::: {.column width="50%"}
+![](images/plastic_monster_celine_bellanger_UN_plastic_is_forever.jpg)
+:::
+
+::::
+
 
 ::: footer
-Learn more: [Incremental Lists](https://quarto.org/docs/presentations/revealjs/#incremental-lists)
+[Plastic monster, France. Photo by Céline Bellanger for the United Nations Environmental Programme (UNEP) Plastic is Forever Exhibit](https://www.un.org/en/exhibits/exhibit/in-images-plastic-forever)
 :::
+
+::: notes
+Declines in coral cover were first noticed by \[person\] in \[location\], and has rapidly gotten worse. Corals cover reduction often due to coral mass bleaching, and coral disease is a conservation problem that scientists have been alarmed about since \[year\]
+
+`8 million tons` of plastics enter the oceans `every year` Like this art piece by photographer Celine Bellanger on the coast of France depits, this is the monster we are fighting
+:::
+
+## So... what are `phthalates`
+
+
+## How do the combined stressors of `heat` and `phthalates` affect the `coral microbiome`? {background="#43464B"}
+
+. . . 
+
+<br/>
+
+## To address this question, I ran an acute toxicity study and exposed fragments from 10 *Montipora capitata* colonies to mesocosms of either control, heat, phthalates, or heat+phthalates
+
+## After 48 hours we flash froze the fragments, and extracted DNA for 16S sequencing
+
+## 
+
