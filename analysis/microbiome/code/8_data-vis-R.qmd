@@ -1,0 +1,120 @@
+---
+title: "Filter Feature Table"
+format: html
+editor: visual
+---
+
+# [Tutorial: Integrating QIIME2 and R for data visualization and analysis using qiime2R (*March 2020 Update v0.99.20*)](https://forum.qiime2.org/t/tutorial-integrating-qiime2-and-r-for-data-visualization-and-analysis-using-qiime2r/4121/1)
+
+## Install R package qiime2R using devtools
+
+```{r}
+if (!requireNamespace("devtools", quietly = TRUE)){install.packages("devtools")}
+
+devtools::install_github("jbisanz/qiime2R") # current version is 0.99.20
+```
+
+```{r}
+library(qiime2R)
+library(tidyverse)
+```
+
+## Read in tab-separated-value (.tsv) metadada
+
+```{r}
+metadata <- readr::read_tsv("../data/sample-metadata-treatment.tsv")
+head(metadata)
+```
+
+## Read in table of amplicon sequence variants
+
+```{r}
+ASV <- read_qza("../output/filtered/table-treatment.qza")
+```
+
+## Reading taxonomy
+
+```{r}
+taxonomy<-read_qza("../output/taxonomy/classification.qza")
+taxonomy<-parse_taxonomy(taxonomy$data)
+head(taxonomy)
+
+```
+
+## Creating a phyloseq object
+
+```{r}
+physeq < -qza_to_phyloseq(
+    features="../output/filtered/table-treatment.qza",
+    tree="../output/tree/rooted_tree.qza",
+    "../output/taxonomy/classification.qza",
+    metadata = "../data/sample-metadata-treatment.tsv"
+    )
+
+```
+
+## Plotting PCoA
+
+```{r}
+metadata <- readr::read_tsv("../data/sample-metadata-treatment.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID') 
+uwunifrac <- read_qza("../output/diversity-treatment/weighted_unifrac_pcoa_results.qza")
+shannon <- read_qza("../output/diversity-treatment/shannon_vector.qza")$data %>% rownames_to_column("SampleID") 
+
+pcoa <- uwunifrac$data$Vectors %>%
+  select(SampleID, PC1, PC2) %>%
+  left_join(metadata) %>%
+  left_join(shannon) %>%
+  ggplot(aes(x=PC1, y=PC2, color=`Temp`, shape=`Pae`, size=shannon_entropy)) +
+  geom_point(alpha=0.5) + #alpha controls transparency and helps when points are overlapping
+  theme_q2r() +
+  scale_shape_manual(values=c(16,1), name="Pae") + #see http://www.sthda.com/sthda/RDoc/figure/graphs/r-plot-pch-symbols-points-in-r.png for numeric shape codes
+  scale_size_continuous(name="Shannon Diversity") +
+  scale_color_manual(name = "Temp", values = c("hot" = "red", "ambient" = "blue"))
+
+pcoa
+
+ggsave("pcoa-plot.jpg", plot = pcoa, device = "jpeg", height = 4, width = 5)
+```
+
+## Plotting a Heatmap
+
+```{r}
+metadata <- readr::read_tsv("../data/sample-metadata-treatment.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID') 
+
+SVs <- read_qza("../output/filtered/table-treatment.qza")$data
+
+taxonomy<-read_qza("../output/taxonomy/classification.qza")$data
+
+
+SVs <- apply(SVs, 2, function(x) x/sum(x)*100) #convert to percent
+
+SVsToPlot<-  
+  data.frame(MeanAbundance=rowMeans(SVs)) %>% #find the average abundance of a SV
+  rownames_to_column("Feature.ID") %>%
+  arrange(desc(MeanAbundance)) %>%
+  top_n(30, MeanAbundance) %>%
+  pull(Feature.ID) #extract only the names from the table
+  
+SVs %>%
+  as.data.frame() %>%
+  rownames_to_column("Feature.ID") %>%
+  gather(-Feature.ID, key="SampleID", value="Abundance") %>%
+  mutate(Feature.ID=if_else(Feature.ID %in% SVsToPlot,  Feature.ID, "Remainder")) %>% #flag features to be collapsed
+  group_by(SampleID, Feature.ID) %>%
+  summarize(Abundance=sum(Abundance)) %>%
+  left_join(metadata) %>%
+  mutate(NormAbundance=log10(Abundance+0.01)) %>% # do a log10 transformation after adding a 0.01% pseudocount. Could also add 1 read before transformation to percent
+  left_join(taxonomy) %>%
+  mutate(Feature=paste(Feature.ID, Taxon)) %>%
+  mutate(Feature=gsub("[dpcofgs]__", "", Feature)) %>% # trim out leading text from taxonomy string
+  ggplot(aes(x=SampleID, y=Feature, fill=NormAbundance)) +
+  geom_tile() +
+  facet_grid(~`PaeTemp`, scales="free_x") +
+  theme_q2r() +
+  theme(axis.text.x=element_text(angle=45, hjust=1)) +
+  scale_fill_viridis_c(name="log10(% Abundance)")
+
+
+```
