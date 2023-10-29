@@ -74,7 +74,7 @@ pcoa <- uwunifrac$data$Vectors %>%
 
 pcoa
 
-ggsave("pcoa-plot.jpg", plot = pcoa, device = "jpeg", height = 4, width = 5)
+ggsave("../data-vis/pcoa-plot.jpg", plot = pcoa, device = "jpeg", height = 4, width = 5)
 ```
 
 ## Plotting a Heatmap
