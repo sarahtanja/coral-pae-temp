@@ -1,0 +1,303 @@
+title-slide-attributes:
+    data-background-image: images/himb-mcap-horizon.jpg
+    data-background-size: contain
+    data-background-opacity: "0.5"
+format: 
+  revealjs:
+    slide-number: true
+
+    theme: [simple, custom.scss]
+---
+
+## {background-image="images/himb-mcap-closeup.jpg"}
+
+::: notes
+**I'll start by introducing you to my study species, Montipora capitata.**
+
+Corals are marine invertebrates closely related to sea anemones in the phylum Cnidaria. 
+Individual animals are known as polyps, which are each crowned by an oral disc or mouth fringed by tentacles that house stinging nematocysts.
+
+The corals I'm going to speak about today are stony (or scleractinian) corals that build (precipitate) a hard skeleton made of crystalline form of calcium carbonate, called aragonite under their soft tissue.
+
+Montipora capitata are members of the Acroporidae family of stony corals which are characterized by their small polyps and the presence of a corallite (skeletal cup) at the tip of each branch. The Acroporidae family of corals that Montipora capitata belongs to is the dominant group of reef-buildings corals in the world. 
+
+Reef-building corals are immensely important - they build the 3D infrastructure that protects low-lying coastlands from wave action or storm surge, they house an incredible diversity of marine organisms as habitat that ultimately provides for people through fishing, and tourism. 
+They have long fascinated ecologists as animals that survive in oligotrophic (nutrient-poor) warm tropical waters through their symbiotic relationships.
+The most high-profile symbiotic relationship corals have, that many people talk about is with photosynthetic dinoflagellate algae called symbiodinium.
+60-100% of healthy reef corals 'diet' of carbon come from photosynthetically fixed carbon made by their algal symbionts. 
+
+**But algae aren't the only symbionts that provide essential functions for corals.**  
+:::
+
+## Corals are `holobionts`, an `assembly of host and many symbionts`
+
+![](images/Relationships_between_corals_and_their_microbial_symbionts.jpg){height="550"}
+
+> "I get by with a little help from my friends" - The Beatles, 1967
+
+::: footer
+By Raquel S. Peixoto, Phillipe M. Rosado, Deborah Catharine de Assis Leite, Alexandre S. Rosado and David G. Bourne
+:::
+
+::: notes
+The holobiont concept posits that a host and its associated sphere of unlike organisms (bacteria, archae, cyanobacteria, fungi) with which it interacts, form a holobiont, and have to be studied together as a coherent biological and functional unit to understand its biology, ecology, and evolution.
+
+This study focuses on the bacterial symbiont community (the microbiome = bacterial community) in corals
+The microbiome facilitates acquisition of trace vitamins and minterals, Sulfur, Nitrogen cycling, and Carbon cycling pathways.. and not just pathways with the host, but pathways with the other symbionts (illustrated here) 
+A good example is Symbiodinium prefer Nitrogen in the form of ammonium, and nitrifying bacteria oxidize ammonium into nitrite and nitrate, less appetizing for algae... but a way for there to be a balance and to check overgrowth of symbiodinium in the holobiont.
+
+So corals really live by these lyrics sung by Ringo Starr, "They get by with a little help from their friends"
+So what happens, when their friends leave?
+:::
+
+
+
+## `Coral reefs` (and their functional `microbiomes`!) are threatened by `marine heat waves` and `pollution`
+
+
+::: {.r-stack}
+![](images/bove.png){.fragment}
+![](images/marangoni.png){.fragment}
+
+![](images/zaneveld.png){.fragment}
+:::
+
+::: notes
+coral bleaching (that symbiotic relationship meltdown (triggered by excessive heat stress, pollution, king tides)) is becoming more frequent, resulting in Alarming losses of coral biomass and habitat.
+It is a HUGE challenge in conservation today.
+As a reminder, 60-100% of healthy reef corals 'diet' of carbon come from photosynthetically fixed carbon made by their algal symbionts.
+Which is why many coral conservation studies are focused in on the relationship between corals and symbiodinium,
+but as we just talked about.. bacteria play a critical role in mediating that relationship
+:::
+
+## {background-image="images/npr-plastic-reef.jpg"}
+
+::: notes
+And of the stressors facing coral reefs, and causing those relationship breakdowns, marine heat waves and pollution are among the most devastating.
+Pollution comes in many forms, and one understudied form of pollution is from plastics. 
+And this can be in many forms
+A high profile study in Science (published by Joleah Lamb & Drew Harvell) found that macroplastics pollution is associated with increased disease in corals
+Microplastics and nanoplastics can be ingested by corals, and could be vectors for potentially pathogenic bacteria
+
+Plastics are even more complicated because they are chock-full of chemical additives that leach out of their polymer matrix, which can happen once plastic is in the ocean, or it can happen in the landfill and be transported to coastal reefs through runoff. 
+
+The most heavily manufactured and produced additive in plastics, are phthalates... phthalate acid esters. They're added to plastics to make them flexible, they're known endocrine disruptors, and they're found in low doses pretty much everywhere scientists have bothered to look for them. 
+Previous studies have shown they disrupt the photosynthetic process in marine bacteria. 
+:::
+
+## How do the combined stressors of `heat` and `phthalates` affect the `coral microbiome`? {background="#43464B"}
+
+
+## We used a `fully-crossed` experimental design to test `coral microbiome response` to `multiple stressors`
+
+![](images/experiment-design-n10.png)
+
+::: {.notes}
+To address this question, I ran an acute toxicity study and exposed fragments from 10 *Montipora capitata* colonies to mesocosms of either control, heat, phthalates, or heat+phthalates for 48 hours
+:::
+
+## We used a `fully-crossed` experimental design to test `coral microbiome response` to `multiple stressors`
+
+![](images/experiment-design-n4.png){width=1200}
+
+::: {.notes}
+For the purpose of this presentation we're only going to focus on these four groups
+:::
+
+## Amplicon Sequence Variant (ASV) data analysis was performed in `QIIME2`
+
+![](https://github.com/Gibbons-Lab/isb_course_2023/raw/main/docs/16S/assets/steps.png)
+
+::: {.panel-tabset}
+
+### Sequencing
+
+- 16S rRNA Amplicon Sequencing
+- Illumina
+- 515F (5′-­GTGCCAGCMGCCGCGGTAA-­3′) and 806R (5′-­GGACTACHVGGGTWTCTAAT-­3′) primers
+
+### Trim and Filter
+
+![](images/trim-demux.png)
+
+### Infer Sequence Variants
+
+![](images/dada2.png)
+
+### Taxonomy Assignment
+
+![](images/silva.png)
+
+### Normalization
+
+![](images/rarefaction.png)
+
+### Diversity & Ecological Insights
+
+:::: {.columns}
+
+::: {.column width='30%'}
+
+- Beta Diversity: Weighted Unifrac PCoA 
+- Taxonomic Composition Barplots 
+  :::
+
+::: {.column width='70%'}
+![](https://gibbons-lab.github.io/isb_course_2023/16S/assets/beta_diversity.png)
+:::
+
+::::
+
+:::
+
+::: footer
+Infographics sourced from the [Gibbons-Lab ISB Course Materials](https://github.com/Gibbons-Lab/isb_course_2023/raw/main/docs/16S/assets/steps.png)
+:::
+
+## The pattern of microbial community `beta diversity` goes from `conserved` to `dispersed` and is driven by `temperature`
+
+
+```{r}
+library(qiime2R)
+library(tidyverse)
+
+metadata <- readr::read_tsv("../analysis/microbiome/data/sample-metadata-treatment.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID') 
+wunifrac <- read_qza("../analysis/microbiome/output/diversity-treatment/weighted_unifrac_pcoa_results.qza")
+shannon <- read_qza("../analysis/microbiome/output/diversity-treatment/shannon_vector.qza")$data %>% rownames_to_column("SampleID")
+
+  
+wunifrac$data$Vectors %>%
+  select(SampleID, PC1, PC2) %>%
+  left_join(metadata) %>%
+  left_join(shannon) %>%
+  ggplot(aes(x=PC1, y=PC2, color=`Temp`, shape=`Pae`, size=shannon_entropy)) +
+  geom_point(alpha=0.7) + #alpha controls transparency and helps when points are overlapping
+  theme_q2r() +
+  scale_shape_manual(values=c(16,1), name="Pae") + #see http://www.sthda.com/sthda/RDoc/figure/graphs/r-plot-pch-symbols-points-in-r.png for numeric shape codes
+  scale_size_continuous(name="Shannon Diversity") +
+  scale_color_manual(name = "Temp", values = c("hot" = "red", "ambient" = "blue"))
+```
+
+::: {.notes}
+unweighted UniFrac distance (a qualitative measure of community dissimilarity that incorporates phylogenetic relationships betwee- the features)
+:::
+
+##
+
+```{r}
+library(qiime2R)
+library(tidyverse)
+
+metadata <- readr::read_tsv("../analysis/microbiome/data/sample-metadata-treatment.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID') 
+wunifrac <- read_qza("../analysis/microbiome/output/diversity-treatment/weighted_unifrac_pcoa_results.qza")
+shannon <- read_qza("../analysis/microbiome/output/diversity-treatment/shannon_vector.qza")$data %>% rownames_to_column("SampleID")
+
+  
+wunifrac$data$Vectors %>%
+  select(SampleID, PC1, PC2) %>%
+  left_join(metadata) %>%
+  left_join(shannon) %>%
+  ggplot(aes(x=PC1, y=PC2, color=`Temp`, shape=`Pae`, size=shannon_entropy)) +
+  geom_point(alpha=0.7) + #alpha controls transparency and helps when points are overlapping
+  theme_q2r() +
+  scale_shape_manual(values=c(16,1), name="Pae") + #see http://www.sthda.com/sthda/RDoc/figure/graphs/r-plot-pch-symbols-points-in-r.png for numeric shape codes
+  scale_size_continuous(name="Shannon Diversity") +
+  scale_color_manual(name = "Temp", values = c("hot" = "red", "ambient" = "blue"))
+```
+
+> “All happy families look alike; each unhappy family is unhappy in its own way”. - Leo Tolstoy, Anna Karenina
+
+::: {.notes}
+Here, we consider a complementary alternative: that the microbiological changes induced by many perturbations are stochastic, and therefore lead to transitions from stable to unstable community states. The result is an ‘Anna Karenina principle’ for animal microbiomes, in which dysbiotic individuals vary more in microbial community composition than healthy individuals—paralleling Leo Tolstoy's dictum that “all happy families look alike; each unhappy family is unhappy in its own way”. 
+Zaneveld, J., McMinds, R. & Vega Thurber, R. Stress and stability: applying the Anna Karenina principle to animal microbiomes. Nat Microbiol 2, 17121 (2017). https://doi.org/10.1038/nmicrobiol.2017.121
+
+:::
+
+
+## The microbiome `composition` is characterized by a `decrease in the beneficial bacteria` Endozoicomonas and an `increase in pathogenic bacteria` from the family Vibrionaceae `in the multiple-stressor group` 
+
+```{r}
+library(tidyverse)
+library(qiime2R)
+
+metadata <- readr::read_tsv("../analysis/microbiome/data/sample-metadata-treatment.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID')
+ASV <- read_qza("../analysis/microbiome/output/filtered/table-treatment.qza")$data
+taxonomy <- read_qza("../analysis/microbiome/output/taxonomy/classification.qza")$data %>% parse_taxonomy()
+
+taxasums <- summarize_taxa(ASV, taxonomy)$Genus
+
+taxa_barplot(taxasums, metadata, "PaeTemp")
+
+```
+
+##
+
+```{r}
+library(tidyverse)
+library(qiime2R)
+
+metadata <- readr::read_tsv("../analysis/microbiome/data/sample-metadata-treatment.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID')
+ASV <- read_qza("../analysis/microbiome/output/filtered/table-treatment.qza")$data
+taxonomy <- read_qza("../analysis/microbiome/output/taxonomy/classification.qza")$data %>% parse_taxonomy()
+
+taxasums <- summarize_taxa(ASV, taxonomy)$Genus
+
+taxa_barplot(taxasums, metadata, "PaeTemp")
+
+```
+
+::: notes
+I want to draw your attention to the group that was exposed to thermal stress only, and see that two out of the four colonies maintained their dominance by Endozoicomonas, but the other two show the pattern of dispersal. However, all four colonies exposed to both stressors show the pattern of dispersal, or departure from the stable to the unstable community. These results actually align really well with previous studies that showed  
+:::
+
+## How can these results inform the `conservation of corals`?{background="#43464B"}
+
+. . .
+
+<br/>
+
+![](images/plastic_monster_celine_bellanger_UN_plastic_is_forever.jpg)
+
+::: footer
+[Plastic monster, France. Photo by Céline Bellanger for the United Nations Environmental Programme (UNEP) Plastic is Forever Exhibit](https://www.un.org/en/exhibits/exhibit/in-images-plastic-forever)
+:::
+
+::: notes
+So what is the takeaway? How can these results inform conservation of corals?
+:::
+
+## Because of their symbiotic relationships `coral reefs` survive in clear, nutrient-poor water, and `are among the most productive marine environments, supporting 25% of marine biodiversity`  {background="#43464B"}
+
+. . .
+
+<br/>
+
+::: {style="width:100%;height:0;padding-bottom:50%;position:absolute;"}
+
+<iframe src="https://giphy.com/embed/cxmwhOBpFEDcc" width="50%" height="50%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
+
+
+</iframe>
+:::
+
+
+::: notes
+ When scientists talk about the ecosystem functions of reefs we're talking about all the good things reefs do: they provide 3D structural habitat, the mucus secreting from them Reefs are essential habitat and
+The importance of the reef is well illustrated in movies like 'Finding Nemo', the reef is home to a diversity of marine organisms. 
+And I want you to keep in mind that all those functions, all those good things, depends on the survival of corals, facilitated by symbionts 
+:::
+
+## Corals have a better chance at `resilience to thermal stress` if they are `not` also dealing with `phthalate pollution`
+
+::: {.incremental}
+
+- Similar to restrictions on BPA, ban phthalate plasticizer additives in single-use plastics 
+- Encourage policies that reduce single-use plastic manufacturing in the first place
+- Urge extended producer responsibility to fund improvements to waste and recyling systems
+- Set up monitoring of ocean plastic pollution and phthalates in coastal reef systems
+
+:::
