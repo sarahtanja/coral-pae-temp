@@ -4,7 +4,7 @@ format: html
 editor: visual
 ---
 
-# [Tutorial: Integrating QIIME2 and R for data visualization and analysis using qiime2R (*March 2020 Update v0.99.20*)](https://forum.qiime2.org/t/tutorial-integrating-qiime2-and-r-for-data-visualization-and-analysis-using-qiime2r/4121/1)
+### [Integrating QIIME2 and R for data visualization and analysis using qiime2R (*March 2020 Update v0.99.20*)](https://forum.qiime2.org/t/tutorial-integrating-qiime2-and-r-for-data-visualization-and-analysis-using-qiime2r/4121/1)
 
 ## Install R package qiime2R using devtools
 
@@ -44,7 +44,7 @@ head(taxonomy)
 ## Creating a phyloseq object
 
 ```{r}
-physeq <- qza_to_phyloseq(
+phyloseq <- qza_to_phyloseq(
     features = "../output/mesocosm/table-mesocosm.qza",
     tree = "../output/tree/rooted_tree.qza",
     "../output/taxonomy/classification.qza",
@@ -56,10 +56,10 @@ physeq <- qza_to_phyloseq(
 ## Plotting PCoA
 
 ```{r}
-metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-treatment.tsv")
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-mesocosm.tsv")
 metadata <- metadata %>% rename('SampleID' = '#SampleID') 
-uwunifrac <- read_qza("../output/diversity-treatment/weighted_unifrac_pcoa_results.qza")
-shannon <- read_qza("../output/diversity-treatment/shannon_vector.qza")$data %>% rownames_to_column("SampleID") 
+uwunifrac <- read_qza("../output/mesocosm/diversity-core/weighted_unifrac_pcoa_results.qza")
+shannon <- read_qza("../output/mesocosm/diversity-core/shannon_vector.qza")$data %>% rownames_to_column("SampleID") 
 
 pcoa <- uwunifrac$data$Vectors %>%
   select(SampleID, PC1, PC2) %>%
@@ -77,13 +77,43 @@ pcoa
 ggsave("../data-vis/pcoa-plot.jpg", plot = pcoa, device = "jpeg", height = 4, width = 5)
 ```
 
+```{r}
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-mesocosm.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID') 
+uwunifrac <- read_qza("../output/mesocosm/diversity-core/weighted_unifrac_pcoa_results.qza")
+shannon <- read_qza("../output/mesocosm/diversity-core/shannon_vector.qza")$data %>% rownames_to_column("SampleID") 
+
+uwunifrac$data$Vectors %>%
+  select(SampleID, PC1, PC2) %>%
+  left_join(metadata) %>%
+  left_join(shannon) %>%
+  ggplot(aes(x=PC1, y=PC2, color=`Temp`, shape=`Pae`, size=shannon_entropy)) +
+  geom_point(alpha=0.5) + #alpha controls transparency and helps when points are overlapping
+  theme_q2r() +
+  scale_shape_manual(values=c(16,1), name="Pae") + #see http://www.sthda.com/sthda/RDoc/figure/graphs/r-plot-pch-symbols-points-in-r.png for numeric shape codes
+  scale_size_continuous(name="Shannon Diversity") +
+  scale_color_manual(name = "Temp", values = c("hot" = "#F6B092", "ambient" = "#93E9BE"))
+```
+
+## Plotting Taxa Barplot
+
+```{r}
+# Create a taxa barplot
+taxa_barplot <- taxa_bar(phyloseq, fill = "Genus") +
+   theme_minimal() +
+   labs(title = "Taxa Barplot")
+
+# Print the plot
+print(taxa_barplot)
+```
+
 ## Plotting a Heatmap
 
 ```{r}
-metadata <- readr::read_tsv("../data/sample-metadata-treatment.tsv")
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-mesocosm.tsv")
 metadata <- metadata %>% rename('SampleID' = '#SampleID') 
 
-SVs <- read_qza("../output/filtered/table-treatment.qza")$data
+SVs <- read_qza("../output/mesocosm/table-mesocosm.qza")$data
 
 taxonomy<-read_qza("../output/taxonomy/classification.qza")$data
 
@@ -94,7 +124,7 @@ SVsToPlot<-
   data.frame(MeanAbundance=rowMeans(SVs)) %>% #find the average abundance of a SV
   rownames_to_column("Feature.ID") %>%
   arrange(desc(MeanAbundance)) %>%
-  top_n(30, MeanAbundance) %>%
+  top_n(10, MeanAbundance) %>%
   pull(Feature.ID) #extract only the names from the table
   
 SVs %>%
@@ -117,4 +147,36 @@ SVs %>%
   scale_fill_viridis_c(name="log10(% Abundance)")
 
 
+```
+
+## Plotting Differential Abundance Volcano Plot
+
+```{r}
+library(tidyverse)
+library(qiime2R)
+library(ggrepel) # for offset labels
+library(ggtree) # for visualizing phylogenetic trees
+library(ape) # for manipulating phylogenetic trees
+metadata<-read_q2metadata("sample-metadata.tsv")
+SVs<-read_qza("table.qza")$data
+results<-read_qza("differentials.qza")$data
+taxonomy<-read_qza("taxonomy.qza")$data
+tree<-read_qza("rooted-tree.qza")$data
+```
+
+```{r}
+results %>%
+  left_join(taxonomy) %>%
+  mutate(Significant=if_else(we.eBH<0.1,TRUE, FALSE)) %>%
+  mutate(Taxon=as.character(Taxon)) %>%
+  mutate(TaxonToPrint=if_else(we.eBH<0.1, Taxon, "")) %>% #only provide a label to signifcant results
+  ggplot(aes(x=diff.btw, y=-log10(we.ep), color=Significant, label=TaxonToPrint)) +
+  geom_text_repel(size=1, nudge_y=0.05) +
+  geom_point(alpha=0.6, shape=16) +
+  theme_q2r() +
+  xlab("log2(fold change)") +
+  ylab("-log10(P-value)") +
+  theme(legend.position="none") +
+  scale_color_manual(values=c("black","red"))
+  ggsave("volcano.pdf", height=3, width=3, device="pdf")
 ```
