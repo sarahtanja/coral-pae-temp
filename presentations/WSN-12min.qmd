@@ -216,41 +216,37 @@ Zaneveld, J., McMinds, R. & Vega Thurber, R. Stress and stability: applying the 
 :::
 
 
-## The microbiome `composition` is characterized by a `decrease in the beneficial bacteria` Endozoicomonas and an `increase in pathogenic bacteria` from the family Vibrionaceae `in the multiple-stressor group` 
-
 ```{r}
 library(tidyverse)
 library(qiime2R)
+library(viridis)
 
-metadata <- readr::read_tsv("../analysis/microbiome/data/sample-metadata-treatment.tsv")
+metadata <- readr::read_tsv("../analysis/microbiome/output/mesocosm/sample-metadata-mesocosm.tsv")
 metadata <- metadata %>% rename('SampleID' = '#SampleID')
-ASV <- read_qza("../analysis/microbiome/output/filtered/table-treatment.qza")$data
+ASV <- read_qza("../analysis/microbiome/output/mesocosm/table-mesocosm.qza")$data
 taxonomy <- read_qza("../analysis/microbiome/output/taxonomy/classification.qza")$data %>% parse_taxonomy()
 
-taxasums <- summarize_taxa(ASV, taxonomy)$Genus
+taxasums <- summarize_taxa(ASV, taxonomy)$Family
 
-taxa_barplot(taxasums, metadata, "PaeTemp")
+# Modify the code to use Viridis colors
+taxa_barplot_data <- taxasums %>%
+  gather(key = "Family", value = "Abundance") %>%
+  inner_join(metadata, by = "SampleID")
 
-```
+#taxa_barplot(taxasums, metadata, "PaeTemp")
 
-##
+ggplot(taxa_barplot_data, aes(x = Family, y = Abundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  theme_minimal() +
+  labs(title = "Taxa Barplot", x = "Genus", y = "Abundance") +
+  scale_fill_viridis(option = "C") # Use Viridis color palette, you can change 'option' as needed
 
-```{r}
-library(tidyverse)
-library(qiime2R)
-
-metadata <- readr::read_tsv("../analysis/microbiome/data/sample-metadata-treatment.tsv")
-metadata <- metadata %>% rename('SampleID' = '#SampleID')
-ASV <- read_qza("../analysis/microbiome/output/filtered/table-treatment.qza")$data
-taxonomy <- read_qza("../analysis/microbiome/output/taxonomy/classification.qza")$data %>% parse_taxonomy()
-
-taxasums <- summarize_taxa(ASV, taxonomy)$Genus
-
-taxa_barplot(taxasums, metadata, "PaeTemp")
 
 ```
 
 ::: notes
+The microbiome `composition` is characterized by a `decrease in the beneficial bacteria` Endozoicomonas and an `increase in pathogenic bacteria` from the family Vibrionaceae `in the multiple-stressor group` 
+
 I want to draw your attention to the group that was exposed to thermal stress only, and see that two out of the four colonies maintained their dominance by Endozoicomonas, but the other two show the pattern of dispersal. However, all four colonies exposed to both stressors show the pattern of dispersal, or departure from the stable to the unstable community. These results actually align really well with previous studies that showed  
 :::
 

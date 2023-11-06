@@ -97,14 +97,42 @@ uwunifrac$data$Vectors %>%
 
 ## Plotting Taxa Barplot
 
-```{r}
-# Create a taxa barplot
-taxa_barplot <- taxa_bar(phyloseq, fill = "Genus") +
-   theme_minimal() +
-   labs(title = "Taxa Barplot")
+### [How to create a relative abundance barplot using ggplot](https://github.com/surh/scip_barplot/blob/master/extended_example.md) with [video](https://www.youtube.com/watch?v=siIoupAnILk) by Sur Herrera Paredes
 
-# Print the plot
-print(taxa_barplot)
+```{r}
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-mesocosm.tsv")
+metadata <- metadata %>% rename('sample_id' = '#SampleID')
+
+ASV <- read_qza("../output/mesocosm/table-mesocosm.qza")$data 
+
+ASVtib <- as_tibble(ASV, rownames = "feature_id")
+ASVtib
+```
+
+```{}
+```
+
+```{r}
+ASVlong <- ASVtib %>% 
+  pivot_longer(-feature_id, names_to = "sample_id", values_to = 'count')
+```
+
+```{r}
+
+```
+
+```{r}
+taxonomy <- read_qza("../output/taxonomy/classification.qza")$data %>% parse_taxonomy()
+
+taxonomytib <- as_tibble(taxonomy, rownames = "Feature.ID")
+
+```
+
+```{r}
+
+taxasums <- summarize_taxa(ASV, taxonomy)$Family
+
+taxa_barplot(taxasums, metadata, "PaeTemp")
 ```
 
 ## Plotting a Heatmap
