@@ -22,14 +22,14 @@ library(tidyverse)
 ## Read in tab-separated-value (.tsv) metadada
 
 ```{r}
-metadata <- readr::read_tsv("../data/sample-metadata-treatment.tsv")
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-mesocosm.tsv")
 head(metadata)
 ```
 
 ## Read in table of amplicon sequence variants
 
 ```{r}
-ASV <- read_qza("../output/filtered/table-treatment.qza")
+ASV <- read_qza("../output/mesocosm/table-mesocosm.qza")
 ```
 
 ## Reading taxonomy
@@ -44,11 +44,11 @@ head(taxonomy)
 ## Creating a phyloseq object
 
 ```{r}
-physeq < -qza_to_phyloseq(
-    features="../output/filtered/table-treatment.qza",
-    tree="../output/tree/rooted_tree.qza",
+physeq <- qza_to_phyloseq(
+    features = "../output/mesocosm/table-mesocosm.qza",
+    tree = "../output/tree/rooted_tree.qza",
     "../output/taxonomy/classification.qza",
-    metadata = "../data/sample-metadata-treatment.tsv"
+    metadata = "../output/mesocosm/sample-metadata-mesocosm.tsv"
     )
 
 ```
@@ -56,7 +56,7 @@ physeq < -qza_to_phyloseq(
 ## Plotting PCoA
 
 ```{r}
-metadata <- readr::read_tsv("../data/sample-metadata-treatment.tsv")
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-treatment.tsv")
 metadata <- metadata %>% rename('SampleID' = '#SampleID') 
 uwunifrac <- read_qza("../output/diversity-treatment/weighted_unifrac_pcoa_results.qza")
 shannon <- read_qza("../output/diversity-treatment/shannon_vector.qza")$data %>% rownames_to_column("SampleID") 
