@@ -134,6 +134,7 @@ Infographics sourced from the [Gibbons-Lab ISB Course Materials](https://github.
 ## `Beta diversity` goes from `stable` to `dispersed` and is driven by `temperature`
 
 ```{r}
+
 library(qiime2R)
 library(tidyverse)
 
