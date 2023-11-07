@@ -1,0 +1,16 @@
+identity	1-CA2a	1-CH2a	1-Ea	1-PA2a	1-PH1a	2-CA2a	2-CH1b	2-Ea	2-PA1b	2-PH2a	3-CA1b	3-CH2a	3-Eb	3-PA1a	3-PH1b	4-CA1a	4-CH1a	4-Ea	4-PA2a	4-PH1b	blank-060823STillcus515F	mock-060823STillcus515F	
+conoidasida	6	6	0	30	0	26	0	18	86	0	5	81	10	9	0	48	16	31	55	0	0	0
+diatoma tenuis	1	0	0	7	0	0	0	194	0	0	0	0	0	0	0	0	0	175	0	0	0	0
+asterionella glacialis	0	1	0	0	0	0	0	0	19	0	0	0	0	0	0	0	0	0	0	0	0	0
+polysiphonia scopulorum	0	0	81	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+eurotiomycetes	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	22	0	0	0	0	0	0
+trieres chinensis	2	0	0	0	0	0	0	0	0	0	0	0	5	6	0	0	0	13	0	0	0	0
+asterionellopsis glacialis	2	0	0	0	0	0	0	57	8	0	0	0	0	6	0	0	0	24	0	0	0	0
+macrodactyla	5	15	5	35	0	12	0	41	15	0	4	17	5	3	0	69	5	48	148	0	0	0
+bacillaria paxillifer	13	1	24	6	0	9	0	13	0	0	0	0	2	36	0	10	0	26	0	0	0	0
+bryopsidaceae	44	108	204	1522	30	651	0	224	288	34	167	2254	0	92	2	3664	48	162	315	1	0	0
+navicula lanceolata	13	0	7	0	1	0	0	77	0	0	0	0	0	13	0	0	0	35	0	1	0	0
+cymatosira belgica	0	0	0	0	0	0	0	8	4	0	0	0	13	8	0	2	0	10	0	0	0	0
+thalassiosira eccentrica	0	0	0	0	0	0	0	12	0	0	0	0	0	0	0	0	0	90	0	0	0	0
+attheya septentrionalis	4	0	0	0	0	0	0	37	0	0	0	0	0	0	0	0	0	8	0	0	0	0
+toxarium	25	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
