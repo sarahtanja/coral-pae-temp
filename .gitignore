@@ -3,3 +3,7 @@ analysis/microbiome/data/taxonomy-classifiers/silva-138-99-515-806-nb-classifier
 analysis/microbiome/data/taxonomy-classifiers/silva-138-99-nb-classifier.qza
 analysis/microbiome/output/demux/demux-paired-end.qza
 analysis/microbiome/output/demux/demux-trimmed.qza
+analysis/microbiome/mrdna/analysisfi.../060823STillcus515F-zotus.fa.mapping.txt
+analysis/microbiome/mrdna/pipeline/060823STillcus515F-filtered.fa
+analysis/microbiome/mrdna/pipeline/060823STillcus515F-pr.fastq
+qiime2view/demux-paired-end.qza

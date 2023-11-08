@@ -1,0 +1,17 @@
+id	Pae	Temp	PaeTemp	Tank	pielou_evenness
+#q2:types	categorical	categorical	categorical	categorical	numeric
+1.CA2a	control	ambient	control-ambient	A2	0.132432133107206
+1.CH2a	control	hot	control-hot	H2	0.176137728067896
+1.PA2a	peak	ambient	peak-ambient	A2	0.191089165374018
+1.PH1a	peak	hot	peak-hot	H1	0.433542366662064
+2.CA2a	control	ambient	control-ambient	A2	0.179476873831836
+2.CH1b	control	hot	control-hot	H1	0.41878201497915
+2.PA1b	peak	ambient	peak-ambient	A1	0.315446733808355
+2.PH2a	peak	hot	peak-hot	H2	0.412802146352447
+3.CA1b	control	ambient	control-ambient	A1	0.2610853583611
+3.CH2a	control	hot	control-hot	H2	0.192460673903071
+3.PA1a	peak	ambient	peak-ambient	A1	0.379381933405692
+3.PH1b	peak	hot	peak-hot	H1	0.340634707748655
+4.CA1a	control	ambient	control-ambient	A1	0.192688369009083
+4.CH1a	control	hot	control-hot	H1	0.531103897836673
+4.PH1b	peak	hot	peak-hot	H1	0.436573372255683
