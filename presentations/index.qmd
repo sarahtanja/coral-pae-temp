@@ -80,6 +80,58 @@ And I want you to keep in mind that all those functions, all those good things, 
 :::
 
 
+## Amplicon Sequence Variant (ASV) data analysis was performed in `QIIME2`
+
+![](https://github.com/Gibbons-Lab/isb_course_2023/raw/main/docs/16S/assets/steps.png)
+
+::: {.panel-tabset}
+
+### Sequencing
+
+-   16S rRNA Amplicon Sequencing
+-   Illumina
+-   515F (5′-­GTGCCAGCMGCCGCGGTAA-­3′) and 806R
+    (5′-­GGACTACHVGGGTWTCTAAT-­3′) primers
+
+### Trim and Filter
+
+![](images/trim-demux.png)
+
+### Infer Sequence Variants
+
+![](images/dada2.png)
+
+### Taxonomy Assignment
+
+![](images/silva.png)
+
+### Normalization
+
+![](images/rarefaction.png)
+
+### Diversity & Ecological Insights
+
+::: columns
+
+::: {.column width="30%"}
+-   Beta Diversity: Weighted Unifrac PCoA
+
+-   Taxonomic Composition Barplots
+:::
+
+::: {.column width="70%"}
+![](https://gibbons-lab.github.io/isb_course_2023/16S/assets/beta_diversity.png)
+:::
+
+:::
+
+:::
+
+::: footer
+Infographics sourced from the [Gibbons-Lab ISB Course
+Materials](https://github.com/Gibbons-Lab/isb_course_2023/raw/main/docs/16S/assets/steps.png)
+:::
+
 ## Coral reefs are threatened by climate change and pollution
 
 :::: {.columns}
@@ -105,8 +157,6 @@ Declines in coral cover were first noticed by \[person\] in \[location\], and ha
 `8 million tons` of plastics enter the oceans `every year` Like this art piece by photographer Celine Bellanger on the coast of France depits, this is the monster we are fighting
 :::
 
-## So... what are `phthalates`
-
 
 ## How do the combined stressors of `heat` and `phthalates` affect the `coral microbiome`? {background="#43464B"}
 
@@ -118,5 +168,25 @@ Declines in coral cover were first noticed by \[person\] in \[location\], and ha
 
 ## After 48 hours we flash froze the fragments, and extracted DNA for 16S sequencing
 
-## 
+## Because of their symbiotic relationships `coral reefs` survive in clear, nutrient-poor water, and `are among the most productive marine environments, supporting 25% of marine biodiversity` {background="#43464B"}
+
+. . .
+
+<br/>
+
+::: {style="width:100%;height:0;padding-bottom:50%;position:absolute;"}
+<iframe src="https://giphy.com/embed/cxmwhOBpFEDcc" width="50%" height="50%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen>
+
+</iframe>
+:::
+
+::: notes
+When scientists talk about the ecosystem functions of reefs we're
+talking about all the good things reefs do: they provide 3D structural
+habitat, the mucus secreting from them Reefs are essential habitat and
+The importance of the reef is well illustrated in movies like 'Finding
+Nemo', the reef is home to a diversity of marine organisms. And I want
+you to keep in mind that all those functions, all those good things,
+depends on the survival of corals, facilitated by symbionts
+:::
 

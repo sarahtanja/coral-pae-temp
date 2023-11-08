@@ -97,6 +97,21 @@ uwunifrac$data$Vectors %>%
 
 ## Plotting Taxa Barplot
 
+```{r}
+library(tidyverse)
+library(qiime2R)
+
+metadata <- readr::read_tsv("../output/mesocosm/sample-metadata-mesocosm.tsv")
+metadata <- metadata %>% rename('SampleID' = '#SampleID')
+ASV <- read_qza("../output/mesocosm/table-mesocosm.qza")$data
+taxonomy <- read_qza("../output/taxonomy/classification.qza")$data %>% parse_taxonomy()
+
+taxasums <- summarize_taxa(ASV, taxonomy)$Genus
+
+taxa_barplot(taxasums, metadata, "PaeTemp")
+
+```
+
 ### [How to create a relative abundance barplot using ggplot](https://github.com/surh/scip_barplot/blob/master/extended_example.md) with [video](https://www.youtube.com/watch?v=siIoupAnILk) by Sur Herrera Paredes
 
 ```{r}
@@ -109,22 +124,47 @@ ASVtib <- as_tibble(ASV, rownames = "feature_id")
 ASVtib
 ```
 
-```{}
-```
-
 ```{r}
+
 ASVlong <- ASVtib %>% 
   pivot_longer(-feature_id, names_to = "sample_id", values_to = 'count')
-```
-
-```{r}
 
 ```
 
 ```{r}
+feature_table <- ASVlong %>% 
+  left_join(metadata, by = "sample_id")
+
 taxonomy <- read_qza("../output/taxonomy/classification.qza")$data %>% parse_taxonomy()
+taxonomytib <- as_tibble(taxonomy, rownames = "feature_id")
 
-taxonomytib <- as_tibble(taxonomy, rownames = "Feature.ID")
+feature_table_taxa <- feature_table %>% 
+  left_join(taxonomytib, by = "feature_id")
+```
+
+create basic barplot
+
+```{r}
+
+feature_table %>%
+  ggplot(aes(x = sample_id, y = count)) +
+  geom_bar(aes(fill = feature_id), stat = "identity", position = "fill")
+
+```
+
+
+```{r}
+p1 <- feature_table_taxa %>%
+  ggplot(aes(x = sample_id, y = count)) +
+  facet_grid(~ PaeTemp + Colony, scales = "free_x", space = "free_x") +
+  geom_bar(aes(fill = Family), stat = "identity", position = "fill", width = 1) +
+  scale_y_continuous(name = "Relative abundance", labels = scales::percent) +
+  scale_fill_brewer(palette = "Paired") +
+  theme(axis.text.x = element_text(angle = 90, size = 6),
+        axis.text.y = element_text(color = "black"),
+        strip.text = element_text(face = "bold"),
+        strip.background = element_blank())
+p1
 
 ```
 
